@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="{% static 'style.css' %}" />
+
+{% block content %}
+  <h2><font size="6">Sign up</font> </h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+
+      <p><font size="3">
+        {{ field.label_tag }}<br>
+        {{ field }}
+
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </font></font></p>
+    {% endfor %}
+    <form method="post" action="{% url 'login' %}">
+      <button type="submit">SignUp</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+
+  </form>
+{% endblock %}
